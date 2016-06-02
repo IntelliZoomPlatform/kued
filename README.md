@@ -154,6 +154,56 @@ taskManager.enqueue('stock-quotes', stockQuote).priority('high').attempts(2).sav
 
 ## Daemonizing
 
+Worker config file: `workers.json`
+
+```json
+{
+  "kue": {
+    "prefix": "myservice",
+    "redis": {
+      "port": 6379,
+      "host": "localhost",
+      "auth": "alright_alright_alright"
+    }
+  },
+  "imq": {
+    "token": "abcd1234",
+    "project": "asdfadfadsf"
+  },
+  "workers": [
+    {
+      "name": "MyWorker",
+      "require": "./lib/workers/myworker",
+      "options": {
+        "mongo": "mongodb://blah"
+      }
+    },
+    {
+      "name": "YourWorker",
+      "require": "./lib/workers/yourworker",
+      "options": {
+        "db": "mysql://blah"
+      }
+    }
+  ],
+  "bridges": [
+    {
+      "name": "GoldenGate",
+      "to": "imq:queue",
+      "from": "kue:task-worker-topic",
+      "options": {}
+    }
+  ],
+  "workgroups": [
+    {
+      "workers": ["MyWorker", "YourWorker", "GoldenGate"],
+      "instances": 3
+    }
+  ]
+}
+```
+
+And to start that workers, just use the `workers.js` entrypoint:
 
 ```
 node workers.js --config=workers.json
