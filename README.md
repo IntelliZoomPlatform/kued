@@ -161,16 +161,18 @@ Worker config file: `workers.json`
 ```json
 {
   "kue": {
-    "prefix": "myservice",
-    "redis": {
-      "port": 6379,
-      "host": "localhost",
-      "auth": "alright_alright_alright"
+    "connection": {
+      "prefix": "myservice",
+      "redis": {
+        "port": 6379,
+        "host": "localhost",
+        "auth": "alright_alright_alright"
+      }
     }
   },
   "imq": {
-    "token": "abcd1234",
-    "project": "asdfadfadsf"
+    "token": "abcde12345",
+    "project_id": "asdfadfadsf"
   },
   "workers": [
     {
