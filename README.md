@@ -198,8 +198,12 @@ Worker config file: `workers.json`
   ],
   "workgroups": [
     {
-      "workers": ["MyWorker", "YourWorker", "GoldenGate"],
+      "workers": ["MyWorker", "YourWorker"],
       "instances": 3
+    },
+    {
+      "workers": ["GoldenGate"],
+      "instances": 1
     }
   ]
 }
