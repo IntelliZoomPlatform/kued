@@ -47,6 +47,12 @@ describe('Config Schema', function(){
           }
         }
       ],
+      "checkpointers": [
+        {
+          "name": "redis-checkpointer",
+          "require": "kued/lib/checkpointers/redis"
+        }
+      ],
       "bridges": [
         {
           "name": "GoldenGate",

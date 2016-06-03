@@ -190,6 +190,12 @@ Worker config file: `workers.json`
       }
     }
   ],
+  "checkpointers": [
+    {
+      "name": "redis-checkpointer",
+      "require": "kued/lib/checkpointers/redis"
+    }
+  ],
   "bridges": [
     {
       "name": "GoldenGate",

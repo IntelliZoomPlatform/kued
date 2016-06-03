@@ -8,37 +8,28 @@ const sinonChai = require('sinon-chai');
 const assert = require('assert');
 chai.use(sinonChai);
 
-const TestUtils = require('../utils');
+const TestUtils = require('../../utils');
 
-const QueueFactory = require('../../lib/queue-factory');
-const Worker = require('../../lib/worker');
-const Logger = require('../logger');
+const queue = require('./queue');
+
+const Worker = require('../../../lib/worker');
+const Logger = require('../../logger');
 const logger = new Logger();
 
 
 
 describe('Worker', function(){
 
-  const config = {
-    kue: {
-      connection: {
-        prefix: 'worker_test',
-        redis: {
-          port: 6379,
-          host: 'localhost'
-        }
-      }
-    }
-  };
-
   it('should process an item from the queue.', function(next){
+
+    const topic = `worker-test-${new Date().getTime()}`;
 
     let payload = null;
 
     class TestWorker extends Worker {
 
       init(){
-        this.process('test1', function(job, context, done){
+        this.process(topic, function(job, context, done){
           payload = job.data;
           done();
         });
@@ -46,19 +37,16 @@ describe('Worker', function(){
 
     }
 
-    const queue = QueueFactory.create(config.kue);
-    const worker = new TestWorker(config, logger, null, queue);
+    const worker = new TestWorker({}, logger, null, queue);
 
     worker.init();
 
-    queue.create('test1', { foo: 'bar' }).save(function(err){
+    queue.create(topic, { foo: 'bar' }).save(function(err){
 
       setTimeout(TestUtils.wrapAsync(next, function(){
 
         expect(err).to.be.null;
         expect(payload).to.deep.eq({ foo: 'bar' });
-
-        queue.shutdown(100);
 
       }), 100);
     });
