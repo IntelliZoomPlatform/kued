@@ -208,11 +208,11 @@ Worker config file: `workers.json`
 And to start that workers, just use the `workers.js` entrypoint:
 
 ```
-node workers.js --config=workers.json
+kued workers --config=workers.json
 ```
 
 ## Task Enqueuing from Cli
 
 ```
-node tasks.js --config=tasks.json taskname --params
+kued task --config=tasks.json taskname --params
 ```
