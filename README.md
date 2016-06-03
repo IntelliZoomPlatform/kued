@@ -208,11 +208,15 @@ Worker config file: `workers.json`
 And to start that workers, just use the `workers.js` entrypoint:
 
 ```
-kued workers --config=workers.json
+# Your project
+npm install
+./node_modules/.bin/kued workers --config=workers.json
 ```
 
 ## Task Enqueuing from Cli
 
 ```
-kued task --config=tasks.json taskname --params
+# Your project
+npm install
+./node_modules/.bin/kued task --config=tasks.json taskname --params
 ```
