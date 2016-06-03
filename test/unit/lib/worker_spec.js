@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const chai = require('chai');
 const expect = chai.expect;
 const sinon = require('sinon');
@@ -102,6 +103,31 @@ describe('Worker', function(){
       worker.init();
 
       expect(queueStub.process).to.be.calledWithMatch('test-topic', 1, sinon.match.func);
+
+    });
+
+    it('should throw an error if checkpoint is used and the checkpointer is invalid (null or not object)', function(){
+
+      class TestWorker extends Worker {
+
+        init(){
+          this.checkpoint()
+              .topic('mytopic')
+            .keyFactory(_.noop)
+            .iff(_.noop)
+            .process(_.noop);
+        }
+      }
+
+      const queueStub = createQueueStub();
+
+      const worker = new TestWorker({}, logger, null, queueStub);
+
+      expect(function(){
+
+        worker.init();
+
+      }).to.throw(assert.AssertionError);
 
     });
   });
