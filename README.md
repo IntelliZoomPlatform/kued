@@ -1,6 +1,8 @@
 # kued
 Extensions for Kue (Daemonization, Checkpointing, etc.)
 
+![Build Status](https://circleci.com/gh/YEDev/kued.svg?style=shield&circle-token=:circle-token)
+
 ## Workers
 
 Kued simplifies worker creation by organizing Job handling around classes:
