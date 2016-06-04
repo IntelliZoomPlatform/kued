@@ -7,7 +7,7 @@ const expect = chai.expect;
 const Joi = require('joi');
 const WorkGroupsSchema = require('../../../../lib/schemas/workgroups');
 
-describe('Workers Schema', function(){
+describe('WorkGroups Schema', function(){
 
   const expectToBeValid = function(config){
     const shouldBeValid = Joi.validate(config, WorkGroupsSchema);
