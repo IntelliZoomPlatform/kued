@@ -16,7 +16,11 @@ const logger = new Logger();
 const RedisCheckpointer = require('../../../lib/checkpointers/redis');
 
 const dtg = new Date().getTime();
-const checkpointer = new RedisCheckpointer({ prefix: `checkpointer-${dtg}` }, logger);
+
+const checkpointer = new RedisCheckpointer({
+  prefix: `checkpointer-${dtg}`,
+  connection: 'redis://localhost'
+}, logger);
 
 describe('Redis Checkpointer', function() {
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const QueueFactory = require('../../../lib/queue-factory');
+const KueFactory = require('../../../lib/factories/kue');
 
 const config = {
   kue: {
@@ -14,4 +14,4 @@ const config = {
   }
 };
 
-module.exports = QueueFactory.create(config.kue);
+module.exports = KueFactory.create(config.kue);

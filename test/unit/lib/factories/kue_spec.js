@@ -5,20 +5,19 @@ const chai = require('chai');
 const expect = chai.expect;
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
-const Joi = require('joi');
 chai.use(sinonChai);
 
-const QueueFactory = require('../../../lib/queue-factory');
-const Logger = require('../../logger');
+const KueFactory = require('../../../../lib/factories/kue');
+const Logger = require('../../../logger');
 const logger = new Logger();
 
-describe('Queue Factory', function(){
+describe('Kue Factory', function(){
 
   it('should throw an error if the Kue configuration is not correct', function(){
 
     expect(function(){
 
-      QueueFactory.create({});
+      KueFactory.create({});
 
     }).to.throw(Error);
   });
@@ -35,7 +34,7 @@ describe('Queue Factory', function(){
 
     kue.createQueue.returns(queue);
 
-    QueueFactory.create({ watchStuckInterval: 142, connection: { redis: {} }}, kue);
+    KueFactory.create({ watchStuckInterval: 142, connection: { redis: {} }}, logger, kue);
 
     expect(kue.createQueue).to.be.called;
     expect(queue.watchStuckJobs).to.be.calledWith(142);
