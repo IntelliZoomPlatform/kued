@@ -37,7 +37,7 @@ describe('Worker', function(){
 
     }
 
-    const worker = new TestWorker({}, logger, null, queue);
+    const worker = new TestWorker({}, logger, queue);
 
     worker.init();
 

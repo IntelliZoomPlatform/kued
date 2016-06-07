@@ -35,7 +35,7 @@ describe('Worker', function(){
 
       const queueStub = createQueueStub();
 
-      const worker = new TestWorker({}, logger, sinon.spy(), queueStub);
+      const worker = new TestWorker({}, logger, queueStub, sinon.spy());
 
       worker.init();
 
@@ -56,7 +56,7 @@ describe('Worker', function(){
 
       const queueStub = createQueueStub();
 
-      const worker = new TestWorker({}, logger, sinon.spy(), queueStub);
+      const worker = new TestWorker({}, logger, queueStub, sinon.spy());
 
       worker.init();
 
@@ -75,7 +75,7 @@ describe('Worker', function(){
 
       const queueStub = createQueueStub();
 
-      const worker = new TestWorker({}, logger, sinon.spy(), queueStub);
+      const worker = new TestWorker({}, logger, queueStub, sinon.spy());
 
       expect(function(){
 
@@ -98,7 +98,7 @@ describe('Worker', function(){
 
       const queueStub = createQueueStub();
 
-      const worker = new TestWorker({}, logger, sinon.spy(), queueStub);
+      const worker = new TestWorker({}, logger, queueStub, sinon.spy());
 
       worker.init();
 
@@ -121,7 +121,7 @@ describe('Worker', function(){
 
       const queueStub = createQueueStub();
 
-      const worker = new TestWorker({}, logger, null, queueStub);
+      const worker = new TestWorker({}, logger, queueStub, null);
 
       expect(function(){
 
@@ -156,7 +156,7 @@ describe('Worker', function(){
 
       const queueStub = createQueueStub(processStub);
 
-      const worker = new TestWorker({}, logger, sinon.spy(), queueStub);
+      const worker = new TestWorker({}, logger, queueStub, sinon.spy());
 
       worker.init();
 

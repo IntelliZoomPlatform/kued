@@ -51,7 +51,7 @@ describe('CronWorker', function(){
     }
 
     // Every second
-    const worker = new TestWorker({ cron: { cronTime: '* * * * * *' } }, logger, null, queue);
+    const worker = new TestWorker({ cron: { cronTime: '* * * * * *' } }, logger, queue);
 
     worker.init();
 

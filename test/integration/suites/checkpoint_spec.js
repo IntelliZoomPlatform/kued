@@ -64,7 +64,7 @@ describe('Checkpoint', function(){
     checkpointer.getCheckpoint.withArgs(3).callsArgWith(1, null, -1);
     checkpointer.getCheckpoint.withArgs(4).callsArgWith(1, null, 4);
 
-    const worker = new TestWorker({}, logger, checkpointer, queue);
+    const worker = new TestWorker({}, logger, queue, checkpointer);
 
     worker.init();
 
