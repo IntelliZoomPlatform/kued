@@ -5,7 +5,7 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Joi = require('joi');
-const CheckpointersSchema = require('../../../../lib/schemas/checkpointers');
+const CheckpointersSchema = require('../../../../lib/schemas/checkpointer');
 
 describe('Checkpointers Schema', function(){
 
@@ -22,46 +22,46 @@ describe('Checkpointers Schema', function(){
 
   it('should allow valid checkpointers configuration', function(){
 
-    expectToBeValid([{
+    expectToBeValid({
       name: 'RedisCheckpointer',
       require: './lib/checkpointers/redis'
-    }]);
+    });
 
-    expectToBeValid([{
+    expectToBeValid({
       name: 'RedisCheckpointer',
       require: './lib/checkpointers/redis',
       options: {
         foo: 'bar'
       }
-    }]);
+    });
 
-    expectToNotBeValid([{
+    expectToNotBeValid({
       name: 'RedisCheckpointer'
-    }]);
+    });
 
-    expectToNotBeValid([{
+    expectToNotBeValid({
       name: 'RedisCheckpointer',
       options: {}
-    }]);
+    });
 
-    expectToNotBeValid([{
+    expectToNotBeValid({
       name: 'RedisCheckpointer',
       require: './lib/checkpointers/redis',
       options: 'asdfadsf'
-    }]);
+    });
   });
 
   it('should set the name to "default" if not provided', function(){
 
-    const result = expectToBeValid([{
+    const result = expectToBeValid({
       require: './lib/checkpointers/redis',
       options: {
         foo: 'bar'
       }
-    }]);
+    });
 
-    expect(result.value[0].name).to.not.be.undefined;
-    expect(result.value[0].name).to.eq('default');
+    expect(result.value.name).to.not.be.undefined;
+    expect(result.value.name).to.eq('default');
   });
 
 });

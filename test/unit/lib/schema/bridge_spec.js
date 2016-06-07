@@ -5,7 +5,7 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Joi = require('joi');
-const BridgeSchema = require('../../../../lib/schemas/bridges');
+const BridgeSchema = require('../../../../lib/schemas/bridge');
 
 describe('Bridges Schema', function(){
 
@@ -21,7 +21,7 @@ describe('Bridges Schema', function(){
 
   it('should allow valid bridge configuration', function(){
 
-    expectToBeValid([{
+    expectToBeValid({
       name: "PaymentsBridge",
       to: "img:payment-updates",
       from: "kue:payment-processor",
@@ -29,66 +29,49 @@ describe('Bridges Schema', function(){
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
       }
-    }]);
+    });
 
-    expectToBeValid([{
+    expectToBeValid({
       name: "PaymentsBridge",
       to: "img:payment-updates",
       from: "kue:payment-processor"
-    }]);
+    });
 
-    expectToNotBeValid([{
+    expectToNotBeValid({
       name: "PaymentsBridge",
       to: "img:payment-updates",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
       }
-    }]);
+    });
 
-    expectToNotBeValid([{
+    expectToNotBeValid({
       name: "PaymentsBridge",
       from: "img:payment-updates",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
       }
-    }]);
+    });
 
-    expectToNotBeValid([{
+    expectToNotBeValid({
       to: "img:payment-updates",
       from: "kue:payment-processor",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
       }
-    }]);
+    });
 
-    expectToNotBeValid([{
+    expectToNotBeValid({
       to: "img:payment-updates",
       from: "kue:payment-processor",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
       }
-    }]);
-
-    expectToNotBeValid([{
-        name: "ValidBridge",
-        to: "img:payment-updates",
-        from: "kue:payment-processor",
-        options: {
-          concurrency: 12,
-          accessToken: 'asdfadsfasdfasdfadsf'
-        }
-      }, {
-        name: "InvalidBridge",
-        to: "img:payment-updates",
-        options: {
-          concurrency: 12,
-          accessToken: 'asdfadsfasdfasdfadsf'
-        }
-    }]);
+    });
   });
 
 

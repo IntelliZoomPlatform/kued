@@ -17,20 +17,29 @@ describe('Config Schema', function(){
   it('should allow valid configuration', function(){
 
     expectToBeValid({
-      "kue": {
-        "connection": {
-          "prefix": "myservice",
-          "redis": {
-            "port": 6379,
-            "host": "localhost",
-            "auth": "alright_alright_alright"
+      "providers": [
+        {
+          "provides": "kue",
+          "connection": {
+            "prefix": "myservice",
+              "redis": {
+              "port": 6379,
+                "host": "localhost",
+                "auth": "alright_alright_alright"
+            }
           }
+        },
+        {
+          "provides": "imq",
+          "token": "abcde12345",
+          "project_id": "asdfadfadsf"
+        },
+        {
+          "provides": "checkpointer",
+          "name": "redis-checkpointer",
+          "require": "kued/lib/checkpointers/redis"
         }
-      },
-      "imq": {
-        "token": "abcde12345",
-        "project_id": "asdfadfadsf"
-      },
+      ],
       "workers": [
         {
           "name": "MyWorker",
@@ -45,12 +54,6 @@ describe('Config Schema', function(){
           "options": {
             "db": "mysql://blah"
           }
-        }
-      ],
-      "checkpointers": [
-        {
-          "name": "redis-checkpointer",
-          "require": "kued/lib/checkpointers/redis"
         }
       ],
       "bridges": [
