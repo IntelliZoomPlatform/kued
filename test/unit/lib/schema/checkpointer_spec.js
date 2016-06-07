@@ -28,20 +28,15 @@ describe('Checkpointers Schema', function(){
     });
 
     expectToBeValid({
+      name: 'RedisCheckpointer'
+    });
+
+    expectToBeValid({
       name: 'RedisCheckpointer',
       require: './lib/checkpointers/redis',
       options: {
         foo: 'bar'
       }
-    });
-
-    expectToNotBeValid({
-      name: 'RedisCheckpointer'
-    });
-
-    expectToNotBeValid({
-      name: 'RedisCheckpointer',
-      options: {}
     });
 
     expectToNotBeValid({
