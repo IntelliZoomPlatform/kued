@@ -20,10 +20,18 @@ describe('IronMQ Bridge Input', function() {
       input: 'imq:test-queue'
     };
 
+    const imq = {
+      queue: sinon.stub()
+    };
+
     const queue = {};
-    const input = new IronMQInput(config, {}, logger, sinon.spy());
+
+    imq.queue.returns(queue);
+
+    const input = new IronMQInput(config, imq, logger);
 
     expect(input.queueName).to.eq('test-queue');
+    expect(imq.queue).to.be.calledWith('test-queue');
   });
 
   it('should dispatch messages to the onMessage handler', function () {
@@ -32,12 +40,18 @@ describe('IronMQ Bridge Input', function() {
       input: 'imq:test-queue'
     };
 
+    const imq = {
+      queue: sinon.stub()
+    };
+
     const queue = {
       reserve: sinon.stub(),
       del_multiple: sinon.stub()
     };
 
-    const input = new IronMQInput(config, {}, logger, queue);
+    imq.queue.returns(queue);
+
+    const input = new IronMQInput(config, imq, logger);
 
     const dispatch = sinon.stub();
 
@@ -65,12 +79,17 @@ describe('IronMQ Bridge Input', function() {
       input: 'imq:test-queue'
     };
 
+    const imq = {
+      queue: sinon.stub()
+    };
+
     const queue = {
       reserve: sinon.stub(),
       del_multiple: sinon.stub()
     };
 
-    const input = new IronMQInput(config, {}, logger, queue);
+    imq.queue.returns(queue);
+    const input = new IronMQInput(config, imq, logger);
 
     const dispatch = sinon.stub();
 

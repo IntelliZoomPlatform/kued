@@ -19,8 +19,15 @@ describe('IronMQ Bridge Output', function() {
       output: 'imq:test-queue'
     };
 
+    const imq = {
+      queue: sinon.stub()
+    };
+
     const queue = {};
-    const output = new IronMQOutput(config, {}, logger, sinon.spy());
+
+    imq.queue.returns(queue);
+
+    const output = new IronMQOutput(config, imq, logger);
 
     expect(output.queueName).to.eq('test-queue');
   });
@@ -31,11 +38,17 @@ describe('IronMQ Bridge Output', function() {
       output: 'imq:test-queue'
     };
 
+    const imq = {
+      queue: sinon.stub()
+    };
+
     const queue = {
       post: sinon.stub()
     };
 
-    const output = new IronMQOutput(config, {}, logger, queue);
+    imq.queue.returns(queue);
+
+    const output = new IronMQOutput(config, imq, logger);
 
     const message = { foo: "bar" };
 
