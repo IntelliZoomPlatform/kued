@@ -28,7 +28,7 @@ describe('IronMQ Bridge Input', function() {
 
     imq.queue.returns(queue);
 
-    const input = new IronMQInput(config, imq, logger);
+    const input = new IronMQInput(config, logger, imq);
 
     expect(input.queueName).to.eq('test-queue');
     expect(imq.queue).to.be.calledWith('test-queue');
@@ -51,7 +51,7 @@ describe('IronMQ Bridge Input', function() {
 
     imq.queue.returns(queue);
 
-    const input = new IronMQInput(config, imq, logger);
+    const input = new IronMQInput(config, logger, imq);
 
     const dispatch = sinon.stub();
 
@@ -89,7 +89,7 @@ describe('IronMQ Bridge Input', function() {
     };
 
     imq.queue.returns(queue);
-    const input = new IronMQInput(config, imq, logger);
+    const input = new IronMQInput(config, logger, imq);
 
     const dispatch = sinon.stub();
 

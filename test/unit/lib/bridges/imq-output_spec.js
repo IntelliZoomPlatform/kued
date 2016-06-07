@@ -27,7 +27,7 @@ describe('IronMQ Bridge Output', function() {
 
     imq.queue.returns(queue);
 
-    const output = new IronMQOutput(config, imq, logger);
+    const output = new IronMQOutput(config, logger, imq);
 
     expect(output.queueName).to.eq('test-queue');
   });
@@ -48,7 +48,7 @@ describe('IronMQ Bridge Output', function() {
 
     imq.queue.returns(queue);
 
-    const output = new IronMQOutput(config, imq, logger);
+    const output = new IronMQOutput(config, logger, imq);
 
     const message = { foo: "bar" };
 

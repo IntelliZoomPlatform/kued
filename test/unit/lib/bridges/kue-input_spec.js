@@ -23,7 +23,7 @@ describe('Kue Bridge Input', function() {
       process: sinon.spy()
     };
 
-    const input = new KueInput(config, queue, logger);
+    const input = new KueInput(config, logger, queue);
 
     expect(input.topicName).to.eq('test-queue');
   });
@@ -38,7 +38,7 @@ describe('Kue Bridge Input', function() {
       process: sinon.spy()
     };
 
-    const input = new KueInput(config, queue, logger);
+    const input = new KueInput(config, logger, queue);
 
     const dispatch = sinon.stub();
 

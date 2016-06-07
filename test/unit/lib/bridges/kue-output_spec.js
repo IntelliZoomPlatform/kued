@@ -20,7 +20,7 @@ describe('Kue Bridge Output', function() {
     };
 
     const queue = {};
-    const output = new KueOutput(config, sinon.spy(), logger);
+    const output = new KueOutput(config, logger, sinon.spy());
 
     expect(output.topicName).to.eq('test-queue');
   });
@@ -49,7 +49,7 @@ describe('Kue Bridge Output', function() {
     job.ttl.returns(job);
     job.delay.returns(job);
 
-    const output = new KueOutput(config, queue, logger);
+    const output = new KueOutput(config, logger, queue);
 
     const message = { foo: "bar" };
 
@@ -101,7 +101,7 @@ describe('Kue Bridge Output', function() {
     job.ttl.returns(job);
     job.delay.returns(job);
 
-    const output = new KueOutput(config, queue, logger);
+    const output = new KueOutput(config, logger, queue);
 
     const message = { foo: "bar" };
 
