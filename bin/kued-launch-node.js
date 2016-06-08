@@ -3,6 +3,6 @@
 'use strict';
 
 const argv = require('minimist')(process.argv.slice(2));
-const Node = require('../lib/node');
+const Workgroup = require('../lib/workgroup');
 
-new Node(argv);
+new Workgroup(argv);

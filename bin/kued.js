@@ -17,17 +17,17 @@ if (configCheck.error){
   console.log(['error'], { message: 'Invalid configuration.', error: configCheck.error });
 }
 
-const NodeManager = require('../lib/node-manager');
-const nodeManager = new NodeManager(console);
+const WorkgroupManager = require('../lib/workgroup-manager');
+const workgroupManager = new WorkgroupManager(console);
 
-nodeManager.connect((err) => {
+workgroupManager.connect((err) => {
 
   if (err) process.exit(-1);
 
-  nodeManager.launch(config, (err) => {
+  workgroupManager.launch(config, (err) => {
 
     if (err) {
-      nodeManager.disconnect(() => {
+      workgroupManager.disconnect(() => {
         if (err) process.exit(-1);
       });
     }

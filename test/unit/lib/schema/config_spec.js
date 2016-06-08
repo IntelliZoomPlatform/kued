@@ -59,8 +59,8 @@ describe('Config Schema', function(){
       "bridges": [
         {
           "name": "GoldenGate",
-          "to": "imq:queue",
-          "from": "kue:task-worker-topic",
+          "input": "imq:queue",
+          "output": "kue:task-worker-topic",
           "options": {}
         }
       ],

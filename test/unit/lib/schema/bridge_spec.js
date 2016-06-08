@@ -23,8 +23,8 @@ describe('Bridges Schema', function(){
 
     expectToBeValid({
       name: "PaymentsBridge",
-      to: "img:payment-updates",
-      from: "kue:payment-processor",
+      output: "img:payment-updates",
+      input: "kue:payment-processor",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
@@ -33,13 +33,13 @@ describe('Bridges Schema', function(){
 
     expectToBeValid({
       name: "PaymentsBridge",
-      to: "img:payment-updates",
-      from: "kue:payment-processor"
+      output: "img:payment-updates",
+      input: "kue:payment-processor"
     });
 
     expectToNotBeValid({
       name: "PaymentsBridge",
-      to: "img:payment-updates",
+      output: "img:payment-updates",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
@@ -48,7 +48,7 @@ describe('Bridges Schema', function(){
 
     expectToNotBeValid({
       name: "PaymentsBridge",
-      from: "img:payment-updates",
+      input: "img:payment-updates",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
@@ -56,8 +56,8 @@ describe('Bridges Schema', function(){
     });
 
     expectToNotBeValid({
-      to: "img:payment-updates",
-      from: "kue:payment-processor",
+      output: "img:payment-updates",
+      input: "kue:payment-processor",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'
@@ -65,8 +65,8 @@ describe('Bridges Schema', function(){
     });
 
     expectToNotBeValid({
-      to: "img:payment-updates",
-      from: "kue:payment-processor",
+      output: "img:payment-updates",
+      input: "kue:payment-processor",
       options: {
         concurrency: 12,
         accessToken: 'asdfadsfasdfasdfadsf'

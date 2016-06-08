@@ -13,46 +13,41 @@
     },
     {
       "provides": "imq",
-      "token": "abcde12345",
-      "project_id": "asdfadfadsf"
+      "token": "Bg6EuxVGIFrL0TDPcQCJ95hNuG8",
+      "project_id": "570276adbac62c0007574477"
     },
     {
       "provides": "checkpointer",
-      "name": "redis-checkpointer",
-      "require": "kued/lib/checkpointers/redis"
+      "require": "kued/lib/factories/checkpointer"
     }
   ],
   "workers": [
     {
-      "name": "MyWorker",
-      "require": "./lib/workers/myworker",
+      "name": "Hello",
+      "require": "kued/test/integration/workers/hello",
       "options": {
-        "mongo": "mongodb://blah"
+        "cron": {
+          "cronTime": "*/6 * * * * *"
+        }
       }
     },
     {
-      "name": "YourWorker",
-      "require": "./lib/workers/yourworker",
-      "options": {
-        "db": "mysql://blah"
-      }
+      "name": "Dumper",
+      "require": "kued/test/integration/workers/dumper",
+      "options": {}
     }
   ],
   "bridges": [
     {
       "name": "GoldenGate",
-      "to": "imq:queue",
-      "from": "kue:task-worker-topic",
+      "input": "imq:kued_integration_tests",
+      "output": "kue:dumper",
       "options": {}
     }
   ],
   "workgroups": [
     {
-      "workers": ["MyWorker", "YourWorker"],
-      "instances": 3
-    },
-    {
-      "workers": ["GoldenGate"],
+      "workers": ["Hello", "Dumper", "GoldenGate"],
       "instances": 1
     }
   ]
