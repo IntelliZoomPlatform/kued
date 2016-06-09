@@ -12,9 +12,7 @@
       }
     },
     {
-      "provides": "imq",
-      "token": "Bg6EuxVGIFrL0TDPcQCJ95hNuG8",
-      "project_id": "570276adbac62c0007574477"
+      "provides": "imq"
     },
     {
       "provides": "checkpointer",

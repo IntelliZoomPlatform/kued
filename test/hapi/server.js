@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const Hapi = require('hapi');
 const Good = require('good');
 const Blipp = require('blipp');
@@ -8,6 +9,18 @@ const KuedPlugin = require('../../lib/integrations/hapi');
 const server = new Hapi.Server();
 
 server.connection({ port: 3000 });
+
+const workers = require('../integration/workers.json');
+
+const imqProvider = _.find(workers.providers, (provider) => {
+  return provider.provides === 'imq';
+});
+
+if (!process.env.IMQ_TOKEN || !process.env.IMQ_PROJECT_ID)
+  throw new Error('Environment variables IMQ_TOKEN and IMQ_PROJECT_ID must be set.');
+
+imqProvider.token = process.env.IMQ_TOKEN;
+imqProvider.project_id = process.env.IMQ_PROJECT_ID;
 
 const plugins = [
   { register: Good, options: {
@@ -26,7 +39,7 @@ const plugins = [
     }
   },
   { register: Blipp, options: {} },
-  { register: KuedPlugin, options: require('../integration/workers.json') }
+  { register: KuedPlugin, options: workers }
 ];
 
 server.register(plugins, (err) => {
