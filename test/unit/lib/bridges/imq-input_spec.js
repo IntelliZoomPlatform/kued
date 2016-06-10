@@ -69,7 +69,7 @@ describe('IronMQ Bridge Input', function() {
     dispatch.callArgWith(1, null);
     queue.del_multiple.callArgWith(1, null);
 
-    expect(dispatch).to.be.calledWith(messages[0]);
+    expect(dispatch).to.be.calledWith(messages[0].body);
     expect(queue.del_multiple).to.be.calledWith({ reservation_ids: messages });
   });
 
@@ -109,12 +109,12 @@ describe('IronMQ Bridge Input', function() {
 
     queue.reserve.callArgWith(1, null, messages);
 
-    dispatch.withArgs(messages[0]).callArgWith(1, null);
-    dispatch.withArgs(messages[1]).callArgWith(1, new Error('Oh no!'));
+    dispatch.withArgs(messages[0].body).callArgWith(1, null);
+    dispatch.withArgs(messages[1].body).callArgWith(1, new Error('Oh no!'));
 
     queue.del_multiple.callArgWith(1, null);
 
-    expect(dispatch).to.be.calledWith(messages[0]);
+    expect(dispatch).to.be.calledWith(messages[0].body);
     expect(queue.del_multiple).to.be.calledWith({ reservation_ids: [ messages[0] ] });
 
   });

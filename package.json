@@ -1,6 +1,6 @@
 {
   "name": "kued",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Extensions for the Kue library (Daemonization, Checkpointing, etc.)",
   "main": "index.js",
   "dependencies": {
