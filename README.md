@@ -228,6 +228,22 @@ npm install
 ./node_modules/.bin/kued workers --config=workers.json
 ```
 
+## Evergreen Integration
+
+Evergreen is side project of ours for making Node configuration easier and more powerful.  We created a simple wrapper to allow a `Workgroup` to be spawned after importing an Evergreen compatible configuration file.
+
+```
+# Get the range of options by specifying the --help flag
+everkued --help
+
+# Example of spawning a Workgroup:
+everkued --config config.json -workgroup ImageProcessor \
+         --workers-path foo.bar.workers --modules trbl-evergreen-mongo
+```
+
+Keep in mind, this is used to spawn only one workgroup.
+
+
 ## Task Enqueuing from Cli
 
 ```

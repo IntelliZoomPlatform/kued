@@ -39,7 +39,7 @@ const plugins = [
     }
   },
   { register: Blipp, options: {} },
-  { register: KuedPlugin, options: workers }
+  { register: KuedPlugin, options: { spawn: true, workers } }
 ];
 
 server.register(plugins, (err) => {

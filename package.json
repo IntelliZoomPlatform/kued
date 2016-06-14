@@ -1,6 +1,6 @@
 {
   "name": "kued",
-  "version": "1.2.4",
+  "version": "1.3.0",
   "description": "Extensions for the Kue library (Daemonization, Checkpointing, etc.)",
   "main": "index.js",
   "dependencies": {
@@ -30,7 +30,8 @@
   },
   "bin": {
     "kued": "bin/kued.js",
-    "kued-launch-node": "bin/kued-launch-node.js"
+    "kued-launch-node": "bin/kued-launch-node.js",
+    "everkued": "bin/everkued.js"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha test/unit --recursive",

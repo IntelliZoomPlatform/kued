@@ -1,0 +1,57 @@
+{
+  "workers": {
+    "providers": [
+      {
+        "provides": "kue",
+        "connection": {
+          "prefix": "myservice",
+          "redis": {
+            "port": 6379,
+            "host": "localhost",
+            "auth": "alright_alright_alright"
+          }
+        }
+      },
+      {
+        "provides": "imq",
+        "token": "{{env.IMQ_TOKEN}}",
+        "project_id": "{{env.IMQ_PROJECT_ID}}"
+      },
+      {
+        "provides": "checkpointer",
+        "require": "kued/lib/factories/checkpointer"
+      }
+    ],
+    "workers": [
+      {
+        "name": "Hello",
+        "require": "kued/test/integration/workers/hello",
+        "options": {
+          "cron": {
+            "cronTime": "*/6 * * * * *"
+          }
+        }
+      },
+      {
+        "name": "Dumper",
+        "require": "kued/test/integration/workers/dumper",
+        "options": {}
+      }
+    ],
+    "bridges": [
+      {
+        "name": "GoldenGate",
+        "input": "imq:kued_integration_tests",
+        "output": "kue:dumper",
+        "options": {}
+      }
+    ],
+    "workgroups": [
+      {
+        "name": "HelloDumper",
+        "workers": ["Hello", "Dumper", "GoldenGate"],
+        "instances": 2
+      }
+    ]
+  }
+}
